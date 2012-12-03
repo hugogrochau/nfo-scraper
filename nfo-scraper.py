@@ -46,8 +46,8 @@ def scrape(page):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-e', '--email', required=True)
-    parser.add_argument('-p', '--password', required=True)
+    parser.add_argument('-e', '--email', help="NFOServers email", required=True)
+    parser.add_argument('-p', '--password', help="NFOServers password", required=True)
     args = parser.parse_args()
 
     data = {
@@ -60,5 +60,5 @@ if __name__ == '__main__':
         print "Wrong email or password"
     else:
         payment_page = get_payment_page(session_cookie)
+        print scrape(payment_page)
     
-    print scrape(payment_page)
