@@ -44,11 +44,6 @@ def scrape(page):
             donation_entries.append(donation_entry)
     return donation_entries
 
-def get_donations(email, password):
-
-
-    return scrape(payment_page)
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-e', '--email', required=True)
