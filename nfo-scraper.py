@@ -27,7 +27,7 @@ def scrape(page):
     and parses them into an array size 4'''
 
     donation_entries = []
-    email_pattern = re.compile("[-a-zA-Z0-9._]+@[-a-zA-Z0-9_]+.[a-zA-Z0-9_.]+")
+    email_pattern = re.compile('[-a-zA-Z0-9._]+@[-a-zA-Z0-9_]+.[a-zA-Z0-9_.]+')
     table = page.findAll('table', { 'class' : 'generictable'})[2]
     rows = table.findAll('tr')
     rows.pop(0) #remove table header
@@ -36,18 +36,18 @@ def scrape(page):
         if columns[0].text.lower().find('donation') != -1:
             donation_data = [str(column.text) for column in columns]
             donation_entry = {
-                "email" : re.findall(email_pattern, donation_data[0].replace("Note", " "))[0],
-                "amount": int(float(donation_data[1])),
-                "datetime": donation_data[2],
-                "note": str(columns[0].i.string),
+                'email' : re.findall(email_pattern, donation_data[0].replace('Note', ' '))[0],
+                'amount': int(float(donation_data[1])),
+                'datetime': donation_data[2],
+                'note': str(columns[0].i.string),
             } 
             donation_entries.append(donation_entry)
     return donation_entries
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-e', '--email', help="NFOServers email", required=True)
-    parser.add_argument('-p', '--password', help="NFOServers password", required=True)
+    parser.add_argument('-e', '--email', help='NFOServers email', required=True)
+    parser.add_argument('-p', '--password', help='NFOServers password', required=True)
     args = parser.parse_args()
 
     data = {
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     session_cookie = login(data)
 
     if session_cookie == None:
-        print "Wrong email or password"
+        print 'Wrong email or password'
     else:
         payment_page = get_payment_page(session_cookie)
         print scrape(payment_page)
