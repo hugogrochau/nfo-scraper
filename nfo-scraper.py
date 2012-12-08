@@ -6,10 +6,10 @@ import re
 import urllib
 import urllib2
 
-def login(data):
+def login(login_data):
     '''Logs in to nfoservers and returns the session cookie'''
     
-    post_data = urllib.urlencode(data) 
+    post_data = urllib.urlencode(login_data) 
     login_request = urllib2.Request('https://www.nfoservers.com/control/status.pl')
     login_response = urllib2.urlopen(login_request, post_data)
     return login_response.headers.get('Set-Cookie')
@@ -50,11 +50,11 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--password', help='NFOServers password', required=True)
     args = parser.parse_args()
 
-    data = {
+    login_data = {
         'email': args.email,
         'password': args.password
     }
-    session_cookie = login(data)
+    session_cookie = login(login_data)
 
     if session_cookie == None:
         print 'Wrong email or password'
