@@ -27,7 +27,7 @@ def scrape(page):
     and parses them into an array size 4'''
 
     donation_entries = []
-    email_pattern = re.compile('[-a-zA-Z0-9._]+@[-a-zA-Z0-9_]+.[a-zA-Z0-9_.]+')
+    email_pattern = re.compile('(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})')
     table = page.findAll('table', { 'class' : 'generictable'})[2]
     rows = table.findAll('tr')
     rows.pop(0) #remove table header
